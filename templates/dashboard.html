@@ -42,13 +42,13 @@
 
     </tr>
   </thead>
-
+ <tbody>
   {% set someoneFound = [] %}
   {% for item in lostitems %}
     {% if item.uploader_email == email %}
 <!--    {{ someoneFound.append(item) }}-->
 
-    <tbody>
+
     <tr>
       <th scope="row">{{ loop.index }}</th>
       <td>{{ item.iname }}</td>
