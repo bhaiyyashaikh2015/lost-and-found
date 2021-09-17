@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% set active_page = 'dashboard' %}
+
+{% block title %} Dashboard {% endblock %}
+{% block body %}
+
+    {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                   <div class="alert alert-success" role="alert">
+                     {{ message }}
+                   </div>
+               {% endfor %}
+         {% endif %}
+    {% endwith %}
+
+<h1>
+    Welcome <strong> {{ email }} </strong>
+</h1>
+    <a class='lostfound btn btn-dark text-white' href="{{ url_for('add_item') }}"> Lost / Found </a>
+
+
+
+
+
+
+
+
+<br><br>
+
+<div class="container">
+    <h4><strong>My Lost Items </strong></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">Item Name</th>
+      <th scope="col">Item Description</th>
+      <th scope="col">Location</th>
+      <th scope="col">Uploader Email</th>
+
+
+    </tr>
+  </thead>
+
+  {% set someoneFound = [] %}
+  {% for item in lostitems %}
+    {% if item.uploader_email == email %}
+<!--    {{ someoneFound.append(item) }}-->
+
+    <tbody>
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ item.iname }}</td>
+      <td>{{ item.idesc }}</td>
+      <td>{{ item.iloc }}</td>
+      <td>{{ item.uploader_email }}</td>
+
+<!--      <td>-->
+<!--        <a href="/delete_lost/{{ item.sno }}" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>-->
+<!--      </td>-->
+
+    </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+<br><br><br><br>
+
+
+<div class="container">
+    <h4><strong>I Found Items </strong></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">Item Name</th>
+      <th scope="col">Item Description</th>
+      <th scope="col">Location</th>
+      <th scope="col">Uploader Email</th>
+
+
+    </tr>
+  </thead>
+   <tbody>
+  {% for item in founditems %}
+  {% if item.uploader_email == email %}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ item.iname }}</td>
+      <td>{{ item.idesc }}</td>
+      <td>{{ item.iloc }}</td>
+      <td>{{ item.uploader_email }}</td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+<br><br><br><br>
+
+
+
+<div class="container">
+    <h4><strong>Someone Found My Item </strong></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">Item Name</th>
+      <th scope="col">Item Description</th>
+      <th scope="col">Location</th>
+      <th scope="col">Uploader Email</th>
+
+
+    </tr>
+  </thead>
+   <tbody>
+  {% for sf in someoneFound %} <!--Empty list -->
+  {% for item in founditems %}
+    {% if sf.iname == item.iname %}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ item.iname }}</td>
+      <td>{{ item.idesc }}</td>
+      <td>{{ item.iloc }}</td>
+      <td>{{ item.uploader_email }}</td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+   {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+
+{% endblock %}

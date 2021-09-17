@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% set active_page = 'signup' %}
+
+{% block title %} Sign Up {% endblock %}
+{% block body %}
+
+<div class="container">
+
+<form action="{{request.path}}" method="post">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="fname">First Name</label>
+      <input type="text" class="form-control" id="fname" name="fname" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="lname">Last name</label>
+      <input type="text" class="form-control" id="lname" name="lname" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" required>
+  </div>
+  <div class="form-group">
+    <label for="addr">Address</label>
+    <input type="text" class="form-control" id="addr" name="addr" placeholder="Apartment, studio, or floor" required>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" name="state" required>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="zip">Zip</label>
+      <input type="text" class="form-control" id="zip" name="zip" required>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-dark">Sign in</button>
+  <br>
+  <br>
+</form>
+
+</div>
+
+{% endblock %}
